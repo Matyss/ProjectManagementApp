@@ -2,16 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk';
 
-import App from './App';
+import ProjectsIndex from './components/ProjectsIndex';
 import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
 	<Provider store={createStoreWithMiddleware(reducers)}>
-		<App />
+		<ProjectsIndex />
 	</Provider>,
 	document.getElementById('root')
 );

@@ -2,6 +2,10 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { selectProject } from '../actions';
+
+import ProjectShow from './ProjectShow';
 
 class ProjectsIndex extends Component {
 	componentDidMount() {
@@ -11,7 +15,11 @@ class ProjectsIndex extends Component {
 	renderProjects() {
 		return _.map(this.props.projects, project => {
 			return (
-				<li className="list-group-item" key={project.id}>
+				<li
+					className="list-group-item"
+					key={project.id}
+					onClick={() => this.props.selectProject(project)}
+				>
 					{project.projectName}
 				</li>
 			);
@@ -27,12 +35,17 @@ class ProjectsIndex extends Component {
 					</Link>
 				</div>
 				<div className="rows">
-					<div className="col-lg-6 col-md-6">
+					<div className="col col-md-6" style={colStyle}>
 						<h3>Your open projects:</h3>
 						<hr />
 						<ul className="list-group">
 							{this.renderProjects()}
 						</ul>
+					</div>
+					<div className="col col-md-6" style={colStyle}>
+						<h3>Active project details:</h3>
+						<hr />
+						<ProjectShow />
 					</div>
 				</div>
 			</div>
@@ -40,8 +53,16 @@ class ProjectsIndex extends Component {
 	}
 }
 
+const colStyle = {
+	marginTop: '40px'
+};
+
 function mapStateToProps({ projects }) {
 	return { projects };
 }
 
-export default connect(mapStateToProps)(ProjectsIndex);
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({ selectProject }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsIndex);

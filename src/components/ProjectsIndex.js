@@ -34,7 +34,7 @@ class ProjectsIndex extends Component {
 						Add a Project
 					</Link>
 				</div>
-				<div className="rows">
+				<div className="row">
 					<div className="col col-md-6" style={colStyle}>
 						<h3>Your open projects:</h3>
 						<hr />

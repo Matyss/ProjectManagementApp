@@ -3,7 +3,23 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteProject, selectProject } from '../actions';
 
+import ProceduresList from './ProceduresList';
+
 class ProjectShow extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			isHidden: true
+		};
+	}
+
+	toggleHidden() {
+		this.setState({
+			isHidden: !this.state.isHidden
+		});
+	}
+
 	onDelete() {
 		const { deleteProject, selectProject } = this.props;
 
@@ -42,6 +58,14 @@ class ProjectShow extends Component {
 				>
 					Delete Project
 				</button>
+				<button
+					className="btn btn-warning pull-xs-right"
+					onClick={this.toggleHidden.bind(this)}
+				>
+					Show Procedures
+				</button>
+				<hr />
+				{!this.state.isHidden && <ProceduresList />}
 			</div>
 		);
 	}

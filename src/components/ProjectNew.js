@@ -5,6 +5,13 @@ import { connect } from 'react-redux';
 import { createProject } from '../actions';
 
 class ProjectNew extends Component {
+	onSubmit(values) {
+		this.props.createProject(values, () => {
+			this.props.history.push('/');
+		});
+		console.log(values);
+	}
+
 	renderField(field) {
 		const { meta: { touched, error } } = field; //instead of field.meta.touched / error
 		const className = `form-group ${touched && error ? 'has-danger' : ''}`;
@@ -25,11 +32,6 @@ class ProjectNew extends Component {
 				</div>
 			</div> // '...' instead of declaring onChange={field.input.onChange} etc.
 		);
-	}
-
-	onSubmit(values) {
-		this.props.createProject(values);
-		console.log(values);
 	}
 
 	render() {

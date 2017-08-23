@@ -2,7 +2,8 @@ export const CREATE_PROJECT = 'CREATE_PROJECT';
 export const SELECT_PROJECT = 'SELECT_PROJECT';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
 
-export function createProject(project) {
+export function createProject(project, callback) {
+	callback();
 	return {
 		type: CREATE_PROJECT,
 		payload: project

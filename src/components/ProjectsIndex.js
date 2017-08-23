@@ -33,6 +33,12 @@ class ProjectsIndex extends Component {
 					<Link to="/project/new" className="btn btn-success">
 						Add a Project
 					</Link>
+					<button
+						className="btn btn-danger"
+						onClick={() => localStorage.clear()}
+					>
+						Reset Database
+					</button>
 				</div>
 				<div className="row">
 					<div className="col col-md-6" style={colStyle}>

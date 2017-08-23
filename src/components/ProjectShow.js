@@ -41,28 +41,26 @@ class ProjectShow extends Component {
 		return (
 			<div>
 				<p>
-					Project Name: {activeProject.projectName}
+					Project Name: <strong>{activeProject.projectName}</strong>
 				</p>
 				<p>
-					Project Location: {activeProject.projectLocation}
+					Project Location: <strong>{activeProject.projectLocation}</strong>
 				</p>
 				<p>
-					Start Date: {activeProject.start}
+					Start Date: <strong>{activeProject.start}</strong>
 				</p>
 				<p>
-					End Date: {activeProject.end}
+					End Date: <strong>{activeProject.end}</strong>
 				</p>
-				<button
-					className="btn btn-danger pull-xs-right"
-					onClick={this.onDelete.bind(this)}
-				>
+				<p>Added procedures:</p>
+				<button className="btn btn-danger" onClick={this.onDelete.bind(this)}>
 					Delete Project
 				</button>
 				<button
-					className="btn btn-warning pull-xs-right"
+					className="btn btn-warning"
 					onClick={this.toggleHidden.bind(this)}
 				>
-					Show Procedures
+					Add Procedures
 				</button>
 				<hr />
 				{!this.state.isHidden && <ProceduresList />}

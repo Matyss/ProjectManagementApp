@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { selectProcedure } from '../actions';
+import { selectProcedure, attachProcedure } from '../actions';
 
 import ProcedureShow from './ProcedureShow';
 
@@ -11,6 +11,7 @@ class ProceduresList extends Component {
 			this.props.activeProcedure,
 			this.props.activeProject
 		);
+		this.props.selectProcedure(null);
 	}
 
 	renderProcedures() {
@@ -55,7 +56,7 @@ function mapStateToProps({ procedures, activeProcedure, activeProject }) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ selectProcedure }, dispatch);
+	return bindActionCreators({ selectProcedure, attachProcedure }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProceduresList);

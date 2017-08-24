@@ -9,7 +9,12 @@ import ProjectShow from './ProjectShow';
 
 class ProjectsIndex extends Component {
 	componentDidMount() {
-		console.log(this.props.projects);
+		// console.log(this.props.projects);
+	}
+
+	resetLocalStorage() {
+		localStorage.clear();
+		window.location.reload();
 	}
 
 	renderProjects() {
@@ -35,7 +40,7 @@ class ProjectsIndex extends Component {
 					</Link>
 					<button
 						className="btn btn-danger"
-						onClick={() => localStorage.clear()}
+						onClick={this.resetLocalStorage.bind(this)}
 					>
 						Reset Database
 					</button>

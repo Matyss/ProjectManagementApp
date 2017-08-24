@@ -27,6 +27,20 @@ class ProjectShow extends Component {
 		selectProject(null);
 	}
 
+	componentDidMount() {
+		this.props.selectProject(null);
+	}
+
+	renderProcedure() {
+		return this.props.activeProject.procedures.map(procedure => {
+			return (
+				<li className="list-group-item" key={procedure.id}>
+					{procedure.title}
+				</li>
+			);
+		});
+	}
+
 	render() {
 		let activeProject = this.props.activeProject;
 
@@ -52,15 +66,18 @@ class ProjectShow extends Component {
 				<p>
 					End Date: <strong>{activeProject.end}</strong>
 				</p>
-				<p>Added procedures:</p>
-				<button className="btn btn-danger" onClick={this.onDelete.bind(this)}>
-					Delete Project
-				</button>
+				<p>Added procedure:</p>
+				<ul className="list-group">
+					{this.renderProcedure()}
+				</ul>
 				<button
 					className="btn btn-warning"
 					onClick={this.toggleHidden.bind(this)}
 				>
 					Add Procedures
+				</button>
+				<button className="btn btn-danger" onClick={this.onDelete.bind(this)}>
+					Delete Project
 				</button>
 				<hr />
 				{!this.state.isHidden && <ProceduresList />}

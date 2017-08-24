@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, FieldArray } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createProject } from '../actions';
@@ -9,7 +9,6 @@ class ProjectNew extends Component {
 		this.props.createProject(values, () => {
 			this.props.history.push('/');
 		});
-		console.log(values);
 	}
 
 	renderField(field) {

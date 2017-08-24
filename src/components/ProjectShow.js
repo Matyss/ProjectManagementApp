@@ -1,22 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteProject, selectProject } from '../actions';
+import { deleteProject, selectProject, selectProcedure } from '../actions';
 
 import ProceduresList from './ProceduresList';
+import TasksList from './TasksList';
 
 class ProjectShow extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			isHidden: true
+			isProcedureHidden: true,
+			isTaskHidden: true
 		};
 	}
 
-	toggleHidden() {
+	toggleHidProcedure() {
 		this.setState({
-			isHidden: !this.state.isHidden
+			isProcedureHidden: !this.state.isProcedureHidden
+		});
+		this.props.selectProcedure(null);
+	}
+
+	toggleHidTask() {
+		this.setState({
+			isTaskHidden: !this.state.isTaskHidden
 		});
 	}
 
@@ -31,15 +40,15 @@ class ProjectShow extends Component {
 		this.props.selectProject(null);
 	}
 
-	renderProcedure() {
-		return this.props.activeProject.procedures.map(procedure => {
-			return (
-				<li className="list-group-item" key={procedure.id}>
-					{procedure.title}
-				</li>
-			);
-		});
-	}
+	// renderProcedure() {
+	// 	return this.props.activeProject.procedures.map(procedure => {
+	// 		return (
+	// 			<li className="list-group-item" key={procedure.id}>
+	// 				{procedure.title}
+	// 			</li>
+	// 		);
+	// 	});
+	// }
 
 	render() {
 		let activeProject = this.props.activeProject;
@@ -68,30 +77,52 @@ class ProjectShow extends Component {
 				</p>
 				<p>Added procedure:</p>
 				<ul className="list-group">
-					{this.renderProcedure()}
+					<li
+						className="list-group-item"
+						onClick={this.toggleHidTask.bind(this)}
+					>
+						{activeProject.procedures[0]
+							? activeProject.procedures[0].title
+							: 'No active procedures'}
+					</li>
 				</ul>
+				<div>
+					{!this.state.isTaskHidden && <TasksList />}
+				</div>
 				<button
 					className="btn btn-warning"
-					onClick={this.toggleHidden.bind(this)}
+					onClick={this.toggleHidProcedure.bind(this)}
+					style={btnStyle}
 				>
 					Add Procedures
 				</button>
-				<button className="btn btn-danger" onClick={this.onDelete.bind(this)}>
+				<button
+					className="btn btn-danger"
+					style={btnStyle}
+					onClick={this.onDelete.bind(this)}
+				>
 					Delete Project
 				</button>
 				<hr />
-				{!this.state.isHidden && <ProceduresList />}
+				{!this.state.isProcedureHidden && <ProceduresList />}
 			</div>
 		);
 	}
 }
+
+const btnStyle = {
+	margin: '15px 8px'
+};
 
 function mapStateToProps({ activeProject }) {
 	return { activeProject };
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ deleteProject, selectProject }, dispatch);
+	return bindActionCreators(
+		{ deleteProject, selectProject, selectProcedure },
+		dispatch
+	);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectShow);

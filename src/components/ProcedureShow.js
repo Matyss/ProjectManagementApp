@@ -5,8 +5,8 @@ class ProcedureShow extends Component {
 	renderTasks() {
 		return this.props.activeProcedure.tasks.map(task => {
 			return (
-				<li className="list-group-item" key={task}>
-					{task}
+				<li className="list-group-item" key={task.name}>
+					{task.name}
 				</li>
 			);
 		});

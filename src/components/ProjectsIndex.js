@@ -35,12 +35,13 @@ class ProjectsIndex extends Component {
 		return (
 			<div className="container">
 				<div className="text-right">
-					<Link to="/project/new" className="btn btn-success">
+					<Link to="/project/new" className="btn btn-success" style={btnStyle}>
 						Add a Project
 					</Link>
 					<button
 						className="btn btn-danger"
 						onClick={this.resetLocalStorage.bind(this)}
+						style={btnStyle}
 					>
 						Reset Database
 					</button>
@@ -66,6 +67,10 @@ class ProjectsIndex extends Component {
 
 const colStyle = {
 	marginTop: '40px'
+};
+
+const btnStyle = {
+	margin: '15px 8px'
 };
 
 function mapStateToProps({ projects }) {

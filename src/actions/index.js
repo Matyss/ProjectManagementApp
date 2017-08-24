@@ -34,7 +34,13 @@ export function selectProcedure(procedure) {
 }
 
 export function attachProcedure(procedure, project) {
+	console.log(procedure);
+	console.log(project);
 	return {
-		type: ATTACH_PROCEDURE
+		type: ATTACH_PROCEDURE,
+		payload: {
+			procedure,
+			project
+		}
 	};
 }

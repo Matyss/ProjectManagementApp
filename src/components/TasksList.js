@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { toggleTask } from '../actions';
 
 class TasksList extends Component {
 	renderTasks() {
 		return this.props.activeProject.procedures.map(procedure => {
 			return procedure.tasks.map(task => {
 				return (
-					<li className="list-group-item" key={task}>
-						{task}
+					<li
+						className="list-group-item"
+						key={task.name}
+						onClick={() => console.log(task)}
+					>
+						{task.name}
 					</li>
 				);
 			});
@@ -26,6 +31,10 @@ class TasksList extends Component {
 
 function mapStateToProps({ activeProject }) {
 	return { activeProject };
+}
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({ toggleTask }, dispatch);
 }
 
 export default connect(mapStateToProps)(TasksList);

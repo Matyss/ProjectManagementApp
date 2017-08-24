@@ -1,6 +1,11 @@
 import _ from 'lodash';
 
-import { CREATE_PROJECT, DELETE_PROJECT, ATTACH_PROCEDURE } from '../actions';
+import {
+	CREATE_PROJECT,
+	DELETE_PROJECT,
+	ATTACH_PROCEDURE,
+	TOGGLE_TASK
+} from '../actions';
 
 export default function(state = {}, action) {
 	switch (action.type) {
@@ -31,7 +36,8 @@ export default function(state = {}, action) {
 					]
 				}
 			};
-
+		case TOGGLE_TASK:
+			return;
 		default:
 			return state;
 	}

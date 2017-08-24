@@ -51,6 +51,8 @@ class ProjectShow extends Component {
 	// }
 
 	render() {
+		console.log(this.props.activeProject);
+
 		let activeProject = this.props.activeProject;
 
 		if (!activeProject) {

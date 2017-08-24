@@ -4,6 +4,8 @@ export const DELETE_PROJECT = 'DELETE_PROJECT';
 export const SELECT_PROCEDURE = 'SELECT_PROCEDURE';
 export const ATTACH_PROCEDURE = 'ATTACH_PROCEDURE';
 
+export const TOGGLE_TASK = 'TOGGLE_TASK';
+
 export function createProject(project, callback) {
 	callback();
 	return {
@@ -34,12 +36,20 @@ export function selectProcedure(procedure) {
 }
 
 export function attachProcedure(procedure, project) {
-	console.log(procedure);
-	console.log(project);
 	return {
 		type: ATTACH_PROCEDURE,
 		payload: {
 			procedure,
+			project
+		}
+	};
+}
+
+export function toggleTask(task, project) {
+	return {
+		type: TOGGLE_TASK,
+		payload: {
+			task,
 			project
 		}
 	};

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { selectProject } from '../actions';
 
 import ProjectShow from './ProjectShow';
+import Header from './Header';
 
 class ProjectsIndex extends Component {
 	constructor() {
@@ -13,15 +14,6 @@ class ProjectsIndex extends Component {
 		this.state = {
 			search: ''
 		};
-	}
-
-	componentDidMount() {
-		// console.log(this.props.projects);
-	}
-
-	resetLocalStorage() {
-		localStorage.clear();
-		window.location.reload();
 	}
 
 	updateSearch(e) {
@@ -42,7 +34,7 @@ class ProjectsIndex extends Component {
 		return _.map(filteredProjects, project => {
 			return (
 				<li
-					className="list-group-item"
+					className="list-group-item list-group-item-action"
 					key={project.id}
 					onClick={() => this.props.selectProject(project)}
 				>
@@ -55,22 +47,21 @@ class ProjectsIndex extends Component {
 	render() {
 		return (
 			<div className="container">
+				<Header />
 				<div>
-					<input
-						type="text"
-						value={this.state.search}
-						onChange={this.updateSearch.bind(this)}
-					/>
-					<Link to="/project/new" className="btn btn-success" style={btnStyle}>
-						Add a Project
-					</Link>
-					<button
-						className="btn btn-danger"
-						onClick={this.resetLocalStorage.bind(this)}
-						style={btnStyle}
-					>
-						Reset Database
-					</button>
+					<div className="input-group">
+						<span className="input-group-addon" id="basic-addon3">
+							Search projects
+						</span>
+						<input
+							type="text"
+							className="form-control"
+							id="basic-url"
+							aria-describedby="basic-addon3"
+							value={this.state.search}
+							onChange={this.updateSearch.bind(this)}
+						/>
+					</div>
 				</div>
 				<div className="row">
 					<div className="col col-md-6" style={colStyle}>
@@ -93,10 +84,6 @@ class ProjectsIndex extends Component {
 
 const colStyle = {
 	marginTop: '40px'
-};
-
-const btnStyle = {
-	margin: '15px 8px'
 };
 
 function mapStateToProps({ projects }) {

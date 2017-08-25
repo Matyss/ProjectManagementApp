@@ -8,6 +8,13 @@ import { selectProject } from '../actions';
 import ProjectShow from './ProjectShow';
 
 class ProjectsIndex extends Component {
+	constructor() {
+		super();
+		this.state = {
+			search: ''
+		};
+	}
+
 	componentDidMount() {
 		// console.log(this.props.projects);
 	}
@@ -17,8 +24,22 @@ class ProjectsIndex extends Component {
 		window.location.reload();
 	}
 
+	updateSearch(e) {
+		this.setState({ search: e.target.value.substr(0, 15) });
+	}
+
 	renderProjects() {
-		return _.map(this.props.projects, project => {
+		const arrayProjects = _.values(this.props.projects);
+
+		const filteredProjects = arrayProjects.filter(pro => {
+			return (
+				pro.projectName
+					.toLowerCase()
+					.indexOf(this.state.search.toLowerCase()) !== -1
+			);
+		});
+
+		return _.map(filteredProjects, project => {
 			return (
 				<li
 					className="list-group-item"
@@ -34,7 +55,12 @@ class ProjectsIndex extends Component {
 	render() {
 		return (
 			<div className="container">
-				<div className="text-right">
+				<div>
+					<input
+						type="text"
+						value={this.state.search}
+						onChange={this.updateSearch.bind(this)}
+					/>
 					<Link to="/project/new" className="btn btn-success" style={btnStyle}>
 						Add a Project
 					</Link>

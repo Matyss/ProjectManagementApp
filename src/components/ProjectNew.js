@@ -38,46 +38,50 @@ class ProjectNew extends Component {
 
 		return (
 			<div className="container">
-				<div className="row">
-					<div className="col-lg-6 col-md-6">
-						<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-							<Field
-								label="Project Name"
-								name="projectName"
-								component={this.renderField}
-								placeholder="e.g. Golden Gate construction"
-							/>
-							<Field
-								label="Project Location"
-								name="projectLocation"
-								component={this.renderField}
-								placeholder="e.g. San Francisco"
-							/>
-							<Field
-								label="Start Date"
-								name="start"
-								component={this.renderField}
-								placeholder="e.g. 22/08/2017"
-							/>
-							<Field
-								label="End Date"
-								name="end"
-								component={this.renderField}
-								placeholder="e.g. 22/08/2019"
-							/>
-							<button type="submit" className="btn btn-success">
-								Submit
-							</button>
-							<Link to="/" className="btn btn-danger">
-								Cancel
-							</Link>
-						</form>
-					</div>
-				</div>
+				<form
+					style={formStyle}
+					onSubmit={handleSubmit(this.onSubmit.bind(this))}
+				>
+					<Field
+						label="Project Name"
+						name="projectName"
+						component={this.renderField}
+						placeholder="e.g. Golden Gate construction"
+					/>
+					<Field
+						label="Project Location"
+						name="projectLocation"
+						component={this.renderField}
+						placeholder="e.g. San Francisco"
+					/>
+					<Field
+						label="Start Date"
+						name="start"
+						component={this.renderField}
+						placeholder="e.g. 22/08/2017"
+					/>
+					<Field
+						label="End Date"
+						name="end"
+						component={this.renderField}
+						placeholder="e.g. 22/08/2019"
+					/>
+					<button type="submit" className="btn btn-success">
+						Submit
+					</button>
+					<Link to="/" className="btn btn-danger">
+						Cancel
+					</Link>
+				</form>
 			</div>
 		);
 	}
 }
+
+const formStyle = {
+	width: '400px',
+	margin: '40px auto'
+};
 
 function validate(values) {
 	const errors = {};

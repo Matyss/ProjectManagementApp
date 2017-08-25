@@ -12,7 +12,8 @@ class ProjectShow extends Component {
 
 		this.state = {
 			isProcedureHidden: true,
-			isTaskHidden: true
+			isTaskHidden: true,
+			hover: false
 		};
 	}
 
@@ -40,27 +41,25 @@ class ProjectShow extends Component {
 		this.props.selectProject(null);
 	}
 
-	// renderProcedure() {
-	// 	return this.props.activeProject.procedures.map(procedure => {
-	// 		return (
-	// 			<li className="list-group-item" key={procedure.id}>
-	// 				{procedure.title}
-	// 			</li>
-	// 		);
-	// 	});
-	// }
+	toggleHover() {
+		this.setState({ hover: !this.state.hover });
+	}
 
 	render() {
-		console.log(this.props.activeProject);
-
 		let activeProject = this.props.activeProject;
-
 		if (!activeProject) {
 			return (
 				<div>
-					<h3>Please select project to get information</h3>
+					<h6>Please select project to get information</h6>
 				</div>
 			);
+		}
+
+		let liStyle = {};
+		if (this.state.hover) {
+			liStyle = { backgroundColor: '#eee', cursor: 'pointer' };
+		} else {
+			liStyle = { backgroundColor: '#fff' };
 		}
 
 		return (
@@ -81,7 +80,10 @@ class ProjectShow extends Component {
 				<ul className="list-group">
 					<li
 						className="list-group-item"
+						style={liStyle}
 						onClick={this.toggleHidTask.bind(this)}
+						onMouseEnter={this.toggleHover.bind(this)}
+						onMouseLeave={this.toggleHover.bind(this)}
 					>
 						{activeProject.procedures[0]
 							? activeProject.procedures[0].title
@@ -92,7 +94,7 @@ class ProjectShow extends Component {
 					{!this.state.isTaskHidden && <TasksList />}
 				</div>
 				<button
-					className="btn btn-warning"
+					className="btn btn-success"
 					onClick={this.toggleHidProcedure.bind(this)}
 					style={btnStyle}
 				>
@@ -113,7 +115,8 @@ class ProjectShow extends Component {
 }
 
 const btnStyle = {
-	margin: '15px 8px'
+	margin: '15px 8px',
+	cursor: 'pointer'
 };
 
 function mapStateToProps({ activeProject }) {

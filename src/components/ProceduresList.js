@@ -18,7 +18,7 @@ class ProceduresList extends Component {
 		return this.props.procedures.map(procedure => {
 			return (
 				<li
-					className="list-group-item"
+					className="list-group-item list-group-item-action"
 					key={procedure.id}
 					onClick={() => this.props.selectProcedure(procedure)}
 				>

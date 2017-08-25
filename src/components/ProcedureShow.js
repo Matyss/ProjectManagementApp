@@ -17,7 +17,7 @@ class ProcedureShow extends Component {
 		if (!activeProcedure) {
 			return (
 				<div>
-					<h3>Please select procedure</h3>
+					<h6>Please select procedure</h6>
 				</div>
 			);
 		}
